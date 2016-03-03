@@ -11,5 +11,9 @@ package analisadorlexico;
  * @author ra143759
  */
 public class primeiro {
+
+    static void init() {
+      
+    }
     
 }

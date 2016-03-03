@@ -11,6 +11,10 @@ package analisadorlexico;
  * @author ra143759
  */
 public class segundo {
+
+    static void init() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
 }

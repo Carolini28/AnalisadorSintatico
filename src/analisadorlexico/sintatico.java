@@ -13,17 +13,26 @@ import java.util.Vector;
  */
 public class sintatico {
     
-    Analisador analise;
-    Tipo token;
-    Vector<Erros> erros;
+    Analisador analise; //analise lexica 
+    Tipo token; //ultimo token
+    Vector<Erros> erros; //erros q foram encontrados
+    boolean finalAnalise; // flag q indica termino de analise
+    private boolean listaArq = false;
+    private boolean listaExp = false;
+    
     
     public sintatico(Analisador analise){
     
         this.analise = analise;
         token = null;
         erros = new Vector<>();
+        primeiro.init();
+        segundo.init();
+       
         
     }
+    
+    
     
     
 }
