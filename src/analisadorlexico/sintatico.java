@@ -32,7 +32,11 @@ public class sintatico {
         
     }
     
+    public void analisar(){
+    
+      
     
     
+    }
     
 }

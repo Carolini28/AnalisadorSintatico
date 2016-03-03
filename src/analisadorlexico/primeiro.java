@@ -6,14 +6,27 @@
 
 package analisadorlexico;
 
+import java.util.HashMap;
+import java.util.List;
+
 /**
  *
  * @author ra143759
  */
 public class primeiro {
-
+    
+    private static HashMap hashmap = new HashMap<String, List>();
+    
     static void init() {
-      
+       adiciona1();
+    }
+    
+    public void adiciona1(String chave, List<String> list){
+        hashmap.put(chave, list);
+    }
+    
+    public static  HashMap imprime(){
+        return hashmap;
     }
     
 }
