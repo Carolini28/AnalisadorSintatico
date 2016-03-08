@@ -35,7 +35,7 @@ public class primeiro {
        adiciona1("termo", primeiro.get("expressao"));
        adiciona1("fator", Arrays.asList("ID","integer","real","("));
        adiciona1("mais_fatores", Arrays.asList("op_mult","op_div"));
-       adiciona1("relacao", Arrays.asList("<",">","<>",">=","<=","="));
+       adiciona1("relacao", Arrays.asList("op_maior","op_menor","op_maior_igual","op_menor_igual", "op_diferente", "op_igual"));
        
        
     }

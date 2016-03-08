@@ -6,6 +6,7 @@
 
 package analisadorlexico;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -18,7 +19,11 @@ public class segundo {
     private static HashMap hashmap = new HashMap<String, List<String>>();
     
     static void init() {
-        
+        adiciona("program",null);
+        adiciona("corpo",Arrays.asList("."));
+        adiciona("comandos",Arrays.asList("end"));
+        adiciona("dc_p",Arrays.asList("begin"));
+        adiciona("dc_v",Arrays.asList("procedure","begin"));
     }
     
     public static List<String> get(String chave){
