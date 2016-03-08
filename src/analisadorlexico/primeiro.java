@@ -44,6 +44,7 @@ public class primeiro {
         return (List<String>) hashmap.get(chave);
     }
     
+    //chave a qual a lista será adicionada e list de terminais e não terminais primeiro(chave)
     public static void adiciona1(String chave, List<String> list){
         hashmap.put(chave, list);
     }
