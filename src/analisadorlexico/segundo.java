@@ -6,15 +6,28 @@
 
 package analisadorlexico;
 
+import java.util.HashMap;
+import java.util.List;
+
 /**
  *
  * @author ra143759
  */
 public class segundo {
-
+ 
+    private static HashMap hashmap = new HashMap<String, List<String>>();
+    
     static void init() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
     
+    public static List<String> get(String chave){
+        return(List<String>)
+        hashmap.get(chave);
+    }
+    
+    public static void adiciona(String chave, List<String> list){
+        hashmap.put(chave, list);
+    }
     
 }
