@@ -47,8 +47,15 @@ public class sintatico {
         }
     }
     
+    //inicia a analise sintática 
     public void analisar() throws Exception{
-    
+       try{ 
+        finalAnalise = false;
+        proxToken();
+       }
+       catch(IOException e){
+           System.out.println("");
+       }
     
     }
 
@@ -67,6 +74,14 @@ public class sintatico {
         erros.add(erro);
     }
     
+    public Vector<String> getErro(){
+    
+        Vector<String> vetorErros = new Vector<String>();
+            for(int i=0; i<erros.size();i++){
+                vetorErros.add(erros.elementAt(i).toString2());
+            }
+        return vetorErros;
+    }
     
     
 }
