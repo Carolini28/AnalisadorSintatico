@@ -6,6 +6,7 @@
 package analisadorlexico;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
 
@@ -77,6 +78,20 @@ public class sintatico {
     
     //Fazer Tratamento de erro espe4cifico do trabalho
 
+    /**
+     * Método que implementa o modo pânico de tratamento de erro, ou seja,
+     * fica procurando por algum token de sincronização para poder retornar
+     * à analise sintática
+     * @param s lista com token de sincronização
+     * @throws Exception
+     */
+    private void TrataErro(List<String> s) throws Exception{
+    
+        while(!s.contains(token.getCode())){
+                proxToken();
+        }
+    
+    }
     
     
     //Retorna todos os erros resultantes da analise
@@ -118,8 +133,36 @@ public class sintatico {
     }
     
     //criar classe para variáveis
+    private void variaveis(List<String> s) throws Exception{
+    
+        while(true){
+            if(token.getCode().equals("ID")){
+                 proxToken();
+                 if(token.getCode().equals(",")){
+                     proxToken();
+                 }else
+                     break;
+            }else{
+                //erro sintático
+                ErroSintatico("Esperado ID, mas "+token.getToken()+" encontrado");
+                TrataErro(s);
+                break;
+            }
+        }
+    
+    }
     
     //Criar para tipo de variáveis
+    private void tipo_variavel(List<String> s)throws Exception {
+    
+        if(token.getCode().equals("real") || token.getCode().equals("integer")){
+              proxToken(); 
+        }else{
+              ErroSintatico("Variável deve ser tipo real ou integer.");
+              TrataErro(s);
+        }
+    
+    }
     
     //Inicio do programa
     private void inicio(List<String> s) throws Exception {
@@ -128,21 +171,25 @@ public class sintatico {
             proxToken();
         }else{
             ErroSintatico("Foi encontrado "+token.getToken()+"ao invés de program");
+            TrataErro(UnirListas(s, Arrays.asList("ID")));
         }
         
         if(token.getCode().equals("ID")){
             proxToken();
         }else{
             ErroSintatico("Foi encontrado "+token.getToken()+"ao invés de ID");
+            TrataErro(UnirListas(s, Arrays.asList(";")));
         }
         
         if(token.getCode().equals(";")){
             proxToken();
         }else{
             ErroSintatico("Foi encontrado "+token.getToken()+"ao invés de ;");
+            TrataErro(UnirListas(s, primeiro.get("corpo")));
         }
         
         //corpo
+        corpo(UnirListas(s, segundo.get("corpo")));
         
         if(!token.getCode().equals(".")){
             ErroSintatico("Foi encontrado "+token.getToken()+"ao invés de .");
