@@ -208,20 +208,26 @@ public class sintatico {
     private void corpo(List<String> s) throws Exception{
     
         //dc_v
+        dc_v(UnirListas(s, segundo.get("dc_v")));
         //dc_p
+        dc_p(UnirListas(s, segundo.get("dc_p")));
         
         if(token.getCode().equals("Begin")){
             proxToken();
         }else{
             ErroSintatico("Foi encontrado "+token.getToken()+"ao invés de begin");
+            TrataErro(primeiro.get("comandos"));
         }
         
         //comandos entre begin e end
+        
+        comandos(UnirListas(s, segundo.get("comandos")));
         
         if(token.getCode().equals("end")){
             proxToken();
         }else{
             ErroSintatico("Foi encontrado "+token.getToken()+"ao invés de end");
+            TrataErro(s);
         }
         
         
@@ -230,11 +236,64 @@ public class sintatico {
     private void dc_v(List<String> s) throws Exception{
         while(token.getCode().equals("var")){
               proxToken();
+              variaveis(UnirListas(s, segundo.get("variaveis")));
+              
+              if(token.getCode().equals(":")){
+                  proxToken();
+              }else{
+                  ErroSintatico("É esperado :, mas "+token.getToken()+"encontrado");
+                  TrataErro(UnirListas(s, primeiro.get("tipo_var")));
+              }
+              
+              tipo_variavel(UnirListas(s, segundo.get("tipo_var")));
+              
+              if(token.getCode().equals(";")){
+                   proxToken();
+              }else{
+                  ErroSintatico("É esperado ;, mas "+token.getToken()+" encontrado");
+                  TrataErro(UnirListas(s, primeiro.get("dc_v")));
+              }
+              
+              
         }
     }
     
-    private void dc_p(){
+    private void dc_p(List<String> s) throws Exception{
     
+            if(token.getCode().equals("procedure")){
+                proxToken();
+                if(token.getCode().equals("ID")){
+                     proxToken();
+                }else{
+                     ErroSintatico("Esperado ID, mas"+token.getToken()+"encontrado");
+                     TrataErro(UnirListas(s, Arrays.asList("(",";")));
+                }
+                
+                if(token.getCode().equals("(")){
+                     proxToken();
+                     
+                }
+            }
+    }
     
+    private void comandos(List<String> s) throws Exception{
+    
+    }
+    
+    private void par_list(List<String> s) throws Exception{
+        
+        variaveis(UnirListas(s, segundo.get("variaveis")));
+        if(token.getCode().equals(":")){
+           proxToken();
+        }else{
+            ErroSintatico("É esperado :, mas"+token.getToken()+"encontrado");
+            TrataErro(UnirListas(s, primeiro.get("tipo_var")));
+        }
+        
+        tipo_variavel(UnirListas(s, segundo.get("tipo_var")));
+        if(token.getCode().equals(";")){
+              proxToken();
+              par_list(s);
+        }
     }
 }
