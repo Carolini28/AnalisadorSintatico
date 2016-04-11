@@ -316,7 +316,23 @@ public class sintatico {
     }
     
     private void comandos(List<String> s) throws Exception{
-    
+        if(primeiro.get("cmd").contains(token.getCode())){
+             cmd(UnirListas(s, segundo.get("cmd")));
+             if(token.getCode().equals(";")){
+                 proxToken();
+             }else{
+                 if(listaArq || listaExp){
+                     ErroSintatico("É esperado ; ou :=, mas "+token.getToken()+" encontrado"); 
+                     listaArq = false;
+                     listaExp = false;
+                     
+                 }else{
+                     ErroSintatico("É esperado ;, mas "+token.getToken()+" encontrado");
+                     TrataErro(UnirListas(s, primeiro.get("comandos")));
+                 }
+             }
+             comandos(s);
+        }
     }
     
     private void par_list(List<String> s) throws Exception{
@@ -334,5 +350,10 @@ public class sintatico {
               proxToken();
               par_list(s);
         }
+    }
+    
+    private void cmd (List<String> s) throws Exception{
+    
+    
     }
 }
