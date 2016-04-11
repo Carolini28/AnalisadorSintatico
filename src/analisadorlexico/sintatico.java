@@ -351,9 +351,44 @@ public class sintatico {
               par_list(s);
         }
     }
+    //<fator> ::= ident | numero_int | numero_real | ( <expressao> ) 
+    private void fator(List<String> s) throws Exception {
+        if(token.getCode().equals("ID") || token.getCode().equals("integer") || token.getCode().equals("real")){
+            proxToken();
+        }else{
+            if(token.getCode().equals("(")){ 
+               proxToken();
+               expressao(UnirListas(s, segundo.get("expressao")));
+               
+                 if(token.getCode().equals(")")){
+                    proxToken();
+                 }else{
+                     ErroSintatico("É esperado ), mas "+token.getToken()+" encontrado");
+                     TrataErro(s);
+                 }
+            }else{
+                 ErroSintatico("É esperado ID, numero inteiro, numero real ou (, mas" +token.getToken()+"encontrado");
+                 TrataErro(UnirListas(s, primeiro.get("expressao")));
+            }
+        }
+    }
+ 
+    private void mais_fatores(List<String> s) throws Exception{
+    
+    }
+    
+    private void expressao(List<String> s) throws Exception{
+    
+    }
     
     private void cmd (List<String> s) throws Exception{
     
+    }
+    
+    private void lista_arg(List<String> s) throws Exception{
     
     }
+    
+   
 }
+
