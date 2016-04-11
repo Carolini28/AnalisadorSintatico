@@ -271,8 +271,47 @@ public class sintatico {
                 
                 if(token.getCode().equals("(")){
                      proxToken();
-                     
+                     par_list(UnirListas(s, segundo.get("lista_par")));
+                        if(token.getCode().equals(")")){
+                            proxToken();
+                        }else{
+                            ErroSintatico("É esperado ), mas "+token.getToken()+" encontrado");
+                            TrataErro(UnirListas(s, Arrays.asList(";")));
+                        }
                 }
+                if(token.getCode().equals(";")){
+                    proxToken();
+                }else{
+                    ErroSintatico("É esperado ; ou (, mas "+token.getToken()+" encontrado");
+                    TrataErro(UnirListas(s, primeiro.get("dc_v")));
+                }
+                
+                dc_v(UnirListas(s, segundo.get("dc_v")));
+                
+                if(token.getCode().equals("begin")){
+                    proxToken();
+                }else{
+                    ErroSintatico("É esperado begin, mas "+token.getToken()+"encontrado");
+                    TrataErro(UnirListas(s, primeiro.get("comandos")));
+                }
+                
+                comandos(UnirListas(s, segundo.get("comandos")));
+                
+                if(token.getCode().equals("end")){
+                    proxToken();
+                }else{
+                    ErroSintatico("É esperado end, mas"+token.getToken()+" encontrado");
+                    TrataErro(UnirListas(s, Arrays.asList(";")));
+                }
+                
+                if(token.getCode().equals(";")){
+                    proxToken();
+                }else{
+                    ErroSintatico("É esperado ;, mas "+token.getToken()+" encontrado");
+                    TrataErro(UnirListas(s, primeiro.get("dc_p")));
+                }
+                
+                dc_p(s);
             }
     }
     
