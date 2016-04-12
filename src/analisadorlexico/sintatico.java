@@ -382,8 +382,25 @@ public class sintatico {
         }
     }
     
+    //<expressao> ::= <termo> <outros_termos> 
     private void expressao(List<String> s) throws Exception{
-    
+        if(token.getCode().equals("+") || token.getCode().equals("-")){
+           listaExp = true;
+           proxToken();
+        }
+        while(true){
+            fator(UnirListas(s, segundo.get("fator")));
+            mais_fatores(UnirListas(s, segundo.get("mais_fatores")));
+            if(token.getCode().equals("+") || token.getCode().equals("-")){
+                listaExp = true;
+                proxToken();
+                if(token.getCode().equals("+") || token.getCode().equals("-")){
+                   proxToken();
+                }
+            }else{
+                break;
+            }
+        }
     }
     
     private void cmd (List<String> s) throws Exception{
