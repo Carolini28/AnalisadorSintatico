@@ -394,6 +394,17 @@ public class sintatico {
     
     }
     
+    //<condicao> ::= <expressao> <relacao> <expressao> 
+    private void condicao(List<String> s) throws Exception{
+        expressao(UnirListas(s, segundo.get("expressao"))); 
+        if(token.getCode().equals("op_igual") || token.getCode().equals("op_diferente") ||token.getCode().equals("op_maior_igual") || token.getCode().equals("op_menor_igual") || token.getCode().equals("op_maior") || token.getCode().equals("op_menor")){
+            proxToken();
+            expressao(UnirListas(s, segundo.get("expressao")));
+        }else{
+            ErroSintatico("É esperado operador relacional, mas "+token.getToken()+" encontrado");
+            TrataErro(s); 
+        }
+    }
    
 }
 

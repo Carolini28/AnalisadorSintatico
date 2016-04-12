@@ -30,7 +30,7 @@ public class primeiro {
        adiciona1("lista_arg", Arrays.asList("("));
        adiciona1("cmd", Arrays.asList("read","write","while","if","begin","ID"));
        adiciona1("comandos", primeiro.get("cmd"));
-       adiciona1("expressao", Arrays.asList("+","-","*","ID","(","op_igual","integer","real","<",">","<>",">=","<=","="));
+       adiciona1("expressao", Arrays.asList("+","-", "op_igual", "integer", "real", "(", "ID"));
        adiciona1("condicao", primeiro.get("expressao"));
        adiciona1("termo", primeiro.get("expressao"));
        adiciona1("fator", Arrays.asList("ID","integer","real","("));
