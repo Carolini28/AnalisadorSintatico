@@ -372,9 +372,14 @@ public class sintatico {
             }
         }
     }
- 
+    //<mais_fatores> ::= <op_mul> <fator> <mais_fatores> | λ 
     private void mais_fatores(List<String> s) throws Exception{
-    
+        if(token.getCode().equals("op_mult") || token.getCode().equals("op_div")){
+           listaExp = true; //não haverá o operador ":=" na msg de erro
+           proxToken();
+           fator(UnirListas(s, segundo.get("fator")));
+           mais_fatores(UnirListas(s, segundo.get("mais_fatores"))); 
+        }
     }
     
     private void expressao(List<String> s) throws Exception{
