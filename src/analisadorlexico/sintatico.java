@@ -407,8 +407,39 @@ public class sintatico {
     
     }
     
+    //<lista_arg> ::= ( <argumentos> ) | λ
     private void lista_arg(List<String> s) throws Exception{
-    
+        if(token.getCode().equals("(")){
+            proxToken();
+            while(true){
+                if(token.getCode().equals("ID")){
+                    proxToken();
+                }else{
+                    ErroSintatico("É esperado ID, mas "+token.getCode()+" encontrado");
+                    TrataErro(UnirListas(s, Arrays.asList(";",")")));
+                }
+                
+                if(token.getCode().equals(";")){
+                    proxToken();
+                }else{
+                    if(token.getCode().equals(")")){
+                       break;
+                    }else{
+                        ErroSintatico("É esperado ;, mas "+token.getToken()+" encontrado");
+                        TrataErro(UnirListas(s, Arrays.asList("ID")));
+                        if(!token.getCode().equals("ID")){
+                            break;
+                        }
+                    }
+                }  
+            }
+                if(token.getCode().equals(")")){
+                    proxToken();
+                }else{
+                    ErroSintatico("É esperado ), mas "+token.getToken()+" encontrado");
+                    TrataErro(s);
+                }
+        }
     }
     
     //<condicao> ::= <expressao> <relacao> <expressao> 
