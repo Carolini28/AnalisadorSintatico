@@ -402,9 +402,35 @@ public class sintatico {
             }
         }
     }
-    
+    /*<cmd> ::= read ( <variaveis> ) |
+      write ( <variaveis> ) |
+      while <condicao> do <cmd> |
+      if <condicao> then <cmd> <pfalsa> |
+      ident := <expressao> |
+      ident <lista_arg> |
+      begin <comandos> end */
     private void cmd (List<String> s) throws Exception{
-    
+        if(token.getCode().equals("read") || token.getCode().equals("write")){
+            proxToken();
+            if(token.getCode().equals("(")){
+                proxToken();
+            }else{
+                ErroSintatico("É esperado (, mas "+token.getToken()+" encontrado");
+                TrataErro(UnirListas(s, primeiro.get("variaveis")));
+            }
+            
+            variaveis(UnirListas(s, segundo.get("variaveis")));
+            
+            if(token.getCode().equals(")")){
+                proxToken();
+            }else{
+                ErroSintatico("É esperado , ou ), mas "+token.getToken()+" encontrado");
+                TrataErro(s);
+            }
+        }else{
+        
+        
+        }
     }
     
     //<lista_arg> ::= ( <argumentos> ) | λ
