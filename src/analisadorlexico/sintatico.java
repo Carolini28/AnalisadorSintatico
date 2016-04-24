@@ -428,7 +428,72 @@ public class sintatico {
                 TrataErro(s);
             }
         }else{
-        
+            if(token.getCode().equals("while")){
+                proxToken();
+                condicao(UnirListas(s, segundo.get("condicao")));
+                if(token.getCode().equals("do")){ 
+                    proxToken();
+                }else{
+                    ErroSintatico("É esperado do, mas"+token.getToken()+" encontrado");
+                    TrataErro(UnirListas(s, primeiro.get("cmd")));
+                }
+                cmd(s);
+            }else{
+                if(token.getCode().equals("if")){ 
+                    proxToken();
+                    condicao(UnirListas(s, segundo.get("condicao"))); 
+                    if(token.getCode().equals("then")){ 
+                        proxToken();
+                    }else{
+                        ErroSintatico("É esperado then, mas "+token.getToken()+" encontrado");  
+                        TrataErro(UnirListas(s, primeiro.get("cmd")));
+                    }
+                    
+                    cmd(UnirListas(s, segundo.get("cmd")));
+                    
+                    if(token.getCode().equals("else")){
+                        proxToken();
+                        cmd(UnirListas(s, segundo.get("cmd"))); 
+                    }
+                }else{
+                    if(token.getCode().equals("ID")){
+                        proxToken();
+                        if(token.getCode().equals("atribuicao")){
+                            proxToken();
+                            expressao(UnirListas(s, segundo.get("expressao"))); 
+                        }else{
+                            listaArq = true;
+                            lista_arg(UnirListas(s, segundo.get("lista_arg"))); 
+                        }
+                    }else{
+                        if(token.getCode().equals("begin")){
+                            proxToken();
+                            comandos(UnirListas(s, segundo.get("comandos"))); 
+                            if(token.getCode().equals("end")){
+                                proxToken();
+                            }else{
+                                ErroSintatico("É esperado end, mas "+token.getToken()+" encontrado"); 
+                                TrataErro(s);
+                            } 
+                        }else{
+                            if(token.getCode().equals("repeat")){ 
+                                proxToken();
+                                cmd(UnirListas(s, segundo.get("cmd"))); 
+                                if(token.getCode().equals("until")){ 
+                                    proxToken();                             
+                                }else{
+                                    ErroSintatico("É esperado until, mas "+token.getToken()+"encontrado"); 
+                                    TrataErro(UnirListas(s, primeiro.get("condicao")));
+                                }
+                                condicao(UnirListas(s, segundo.get("condicao"))); 
+                            }else{
+                                ErroSintatico("É esperado read, write, while, if, ID, begin ou reapeat, mas " +token.getToken()+" encontrado"); 
+                                TrataErro(s);
+                            }
+                        }
+                    }
+                }
+            }
         
         }
     }
