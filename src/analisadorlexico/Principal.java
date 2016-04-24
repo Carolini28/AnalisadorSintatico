@@ -186,25 +186,20 @@ public class Principal extends javax.swing.JFrame {
             //faça a análise léxica
             //
             Analisador analyzer = new Analisador(this.list,file);
+            sintatico sintatico = new sintatico(analyzer);
 
-            this.resetResultLexical();
+            sintatico.analisar();
+            Vector<String> erros = sintatico.getErro();
+            
             this.resetErroLexico();
 
             //a funcao analyze abre o arquivo aos poucos e vai analisando...
-            while(!analyzer.isTerminate())
-            {
-                System.out.println("teste1");
-                Tipo tp = analyzer.analise();              
-                    if( tp != null){                      
-                        this.setResultLexical(tp.toString());
-                    }
-                    if(analyzer.hasErro()){ //caso tenha ocorrido um erro                       
-                        this.setErroLexico(analyzer.getErro().toString()+"\n");
-                    }
+            if(erros.size() > 0){
+                this.setErroSintatico(erros);
+            }else{
+                this.setErroSintatico("Sem erros! ");
             }
             
-            
-
         } catch (Exception ex) {
             //se houver erro na abertura do arquivo, chame a janela de erro
             this.showFileError("Erro ao tentar abrir o arquivo!");
@@ -297,5 +292,18 @@ public class Principal extends javax.swing.JFrame {
         jTextArea1.append(toString);
     }
     
+    public void setErroSintatico (Vector<String> erros){
+        for(int i =0; i<erros.size(); i++){
+            jTextArea2.append(erros.get(i));
+        } 
+    }
+    
+    public void setErroSintatico (String erros){
+       
+            jTextArea2.append(erros); 
+    }
+    public void resetErroSintatico (){
+         jTextArea2.setText(null);
+    }
     
 }
