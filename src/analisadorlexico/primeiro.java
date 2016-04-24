@@ -24,13 +24,14 @@ public class primeiro {
        adiciona1("dc_v", Arrays.asList("var"));
        adiciona1("dc_p", Arrays.asList("procedure"));
        adiciona1("tipo_var", Arrays.asList("real","integer"));
-       adiciona1("dc_p", Arrays.asList("procedure"));
+       
        adiciona1("variaveis", Arrays.asList("ID"));
        adiciona1("lista_par", primeiro.get("variaveis"));
        adiciona1("lista_arg", Arrays.asList("("));
        adiciona1("cmd", Arrays.asList("read","write","while","if","begin","ID"));
        adiciona1("comandos", primeiro.get("cmd"));
-       adiciona1("expressao", Arrays.asList("+","-", "op_igual", "integer", "real", "(", "ID"));
+       
+       adiciona1("expressao", Arrays.asList("+","-", "op_igual", "integer", "real", "ID", "("));
        adiciona1("condicao", primeiro.get("expressao"));
        adiciona1("termo", primeiro.get("expressao"));
        adiciona1("fator", Arrays.asList("ID","integer","real","("));

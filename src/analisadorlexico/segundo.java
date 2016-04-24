@@ -24,6 +24,17 @@ public class segundo {
         adiciona("comandos",Arrays.asList("end"));
         adiciona("dc_p",Arrays.asList("begin"));
         adiciona("dc_v",Arrays.asList("procedure","begin"));
+        adiciona("tipo_var", Arrays.asList(";"));
+        adiciona("lista_par", Arrays.asList(")"));
+        adiciona("argumentos", Arrays.asList(")"));
+        adiciona("cmd", Arrays.asList(";","until","else")); 
+        adiciona("condicao", Arrays.asList("do","then",";","until","else")); 
+        adiciona("expressao",Arrays.asList(")","do","then",";","until","else","op_igual","op_diferente","op_maior_igual","op_menor_igual","op_maior","op_menor"));
+        adiciona("variaveis", Arrays.asList(")",":"));
+        adiciona("lista_par", Arrays.asList(")"));
+        adiciona("fator", segundo.get("mais_fatores"));
+        adiciona("mais_fatores", Arrays.asList("+","-"));
+        adiciona("lista_arg",Arrays.asList(";","until","else")); 
     }
     
     public static List<String> get(String chave){
