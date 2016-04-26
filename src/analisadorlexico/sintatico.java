@@ -56,7 +56,7 @@ public class sintatico {
             proxToken();
             inicio(null);
         }catch(IOException e){
-            System.out.println("");
+            System.out.println("TESTE");
         }
     
     }
@@ -106,7 +106,7 @@ public class sintatico {
         return  vetor;
         
     }
-   
+   //Metodo de união de listas
     private List<String> UnirListas(List<String> lista1, List<String> lista2){
         Vector uniao = new Vector();
         
@@ -170,21 +170,21 @@ public class sintatico {
         if(token.getCode().equals("program")){
             proxToken();
         }else{
-            ErroSintatico("Foi encontrado "+token.getToken()+"ao invés de program");
+            ErroSintatico("Foi encontrado "+token.getToken()+" ao invés de program");
             TrataErro(UnirListas(s, Arrays.asList("ID")));
         }
         
         if(token.getCode().equals("ID")){
             proxToken();
         }else{
-            ErroSintatico("Foi encontrado "+token.getToken()+"ao invés de ID");
+            ErroSintatico("Foi encontrado "+token.getToken()+" ao invés de ID");
             TrataErro(UnirListas(s, Arrays.asList(";")));
         }
         
         if(token.getCode().equals(";")){
             proxToken();
         }else{
-            ErroSintatico("Foi encontrado "+token.getToken()+"ao invés de ;");
+            ErroSintatico("Foi encontrado "+token.getToken()+" ao invés de ;");
             TrataErro(UnirListas(s, primeiro.get("corpo")));
         }
         
@@ -192,7 +192,7 @@ public class sintatico {
         corpo(UnirListas(s, segundo.get("corpo")));
         
         if(!token.getCode().equals(".")){
-            ErroSintatico("Foi encontrado "+token.getToken()+"ao invés de .");
+            ErroSintatico("Foi encontrado "+token.getToken()+" ao invés de .");
         }
         
         if(!analise.isTerminate()){
@@ -215,7 +215,7 @@ public class sintatico {
         if(token.getCode().equals("Begin")){
             proxToken();
         }else{
-            ErroSintatico("Foi encontrado "+token.getToken()+"ao invés de begin");
+            ErroSintatico("Foi encontrado "+token.getToken()+" ao invés de begin");
             TrataErro(primeiro.get("comandos"));
         }
         
@@ -226,11 +226,9 @@ public class sintatico {
         if(token.getCode().equals("end")){
             proxToken();
         }else{
-            ErroSintatico("Foi encontrado "+token.getToken()+"ao invés de end");
+            ErroSintatico("Foi encontrado "+token.getToken()+" ao invés de end");
             TrataErro(s);
         }
-        
-        
     }
     
     private void dc_v(List<String> s) throws Exception{
@@ -241,7 +239,7 @@ public class sintatico {
               if(token.getCode().equals(":")){
                   proxToken();
               }else{
-                  ErroSintatico("É esperado :, mas "+token.getToken()+"encontrado");
+                  ErroSintatico("É esperado :, mas "+token.getToken()+" encontrado");
                   TrataErro(UnirListas(s, primeiro.get("tipo_var")));
               }
               
@@ -253,8 +251,6 @@ public class sintatico {
                   ErroSintatico("É esperado ;, mas "+token.getToken()+" encontrado");
                   TrataErro(UnirListas(s, primeiro.get("dc_v")));
               }
-              
-              
         }
     }
     
@@ -291,7 +287,7 @@ public class sintatico {
                 if(token.getCode().equals("begin")){
                     proxToken();
                 }else{
-                    ErroSintatico("É esperado begin, mas "+token.getToken()+"encontrado");
+                    ErroSintatico("É esperado begin, mas "+token.getToken()+" encontrado");
                     TrataErro(UnirListas(s, primeiro.get("comandos")));
                 }
                 
@@ -300,7 +296,7 @@ public class sintatico {
                 if(token.getCode().equals("end")){
                     proxToken();
                 }else{
-                    ErroSintatico("É esperado end, mas"+token.getToken()+" encontrado");
+                    ErroSintatico("É esperado end, mas "+token.getToken()+" encontrado");
                     TrataErro(UnirListas(s, Arrays.asList(";")));
                 }
                 

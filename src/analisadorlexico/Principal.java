@@ -43,9 +43,6 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -77,12 +74,6 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel2.setText("Resultado: ");
 
-        jLabel3.setText("Erros: ");
-
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane2.setViewportView(jTextArea2);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -95,12 +86,9 @@ public class Principal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 417, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2)
                     .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
@@ -123,11 +111,7 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(170, 170, 170))
         );
 
         pack();
@@ -141,7 +125,7 @@ public class Principal extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         /*limpa resultados da análise.*/
-        this.resetErroLexico();
+        this.resetErroSintatico();
         
         JFileChooser jfc = new JFileChooser("D:\\Documentos\\Compiladores_I\\");//mudar dps!
         int result = jfc.showOpenDialog(null);
@@ -191,7 +175,7 @@ public class Principal extends javax.swing.JFrame {
             sintatico.analisar();
             Vector<String> erros = sintatico.getErro();
             
-            this.resetErroLexico();
+            this.resetErroSintatico();
 
             //a funcao analyze abre o arquivo aos poucos e vai analisando...
             if(erros.size() > 0){
@@ -263,16 +247,13 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 
     private void resetErroLexico() {
-        jTextArea2.setText(null);
+        jTextArea1.setText(null);
     }
 
     private void showFileError(String msg) {
@@ -281,7 +262,7 @@ public class Principal extends javax.swing.JFrame {
     }
 
     private void setErroLexico(String erros) {
-        jTextArea2.append(erros);
+        jTextArea1.append(erros);
     }
 
     private void resetResultLexical() {
@@ -294,16 +275,16 @@ public class Principal extends javax.swing.JFrame {
     
     public void setErroSintatico (Vector<String> erros){
         for(int i =0; i<erros.size(); i++){
-            jTextArea2.append(erros.get(i));
+            jTextArea1.append(erros.get(i));
         } 
     }
     
     public void setErroSintatico (String erros){
        
-            jTextArea2.append(erros); 
+            jTextArea1.append(erros); 
     }
     public void resetErroSintatico (){
-         jTextArea2.setText(null);
+         jTextArea1.setText(null);
     }
     
 }
